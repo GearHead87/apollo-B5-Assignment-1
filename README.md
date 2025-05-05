@@ -193,5 +193,48 @@ squareAsync(4).then(console.log);        // Output after 1s: 16
 squareAsync(-3).catch(console.error);    // Output: Error: Negative number not allowed
 ```
 
+
+---
+
+
+## 🎯 Interview Questions - Blog Task
+
+### Write an impactful blog post on **2 of the following questions**:
+
+1. What are some differences between interfaces and types in TypeScript?
+2. What is the use of the `keyof` keyword in TypeScript? Provide an example.
+3. Explain the difference between `any`, `unknown`, and `never` types in TypeScript.
+4. What is the use of `enums` in TypeScript? Provide an example of a numeric and string enum.
+5. What is type inference in TypeScript? Why is it helpful?
+6. How does TypeScript help in improving code quality and project maintainability?
+7. Provide an example of using **union** and **intersection** types in TypeScript.
+
+✅ **Instructions:**
+
+* Choose **any 2** topics from the list and write a blog post about them.
+* Present your blog through the `README.md` file in your GitHub repository.
+* All solutions must be in a **single TypeScript file**.
+* Do **not** include comments like “Problem 1”, “Problem 2”, etc., in your code.
+* Use **meaningful names** for all variables, functions, and classes.
+* Ensure the code is **original**.
+
+  > ⚠️ Plagiarism (copying from friends or online sources) will result in a **zero**.
+* Submit a **GitHub public repository link** containing your:
+
+  * Solutions file
+  * `README.md` with the blog content
+
+## 📤 Submission Guidelines:
+
+* 🔗 **Submit:** GitHub Public Repository Link
+* 📝 **Ensure:** The blog content is inside the `README.md` file
+* 📂 **Organize:** All code and documentation should be in one repo
+
+## 🕒 Assignment Deadlines:
+
+* **60 Marks:** May 08, 2025 – *before 11:59 PM*
+* **50 Marks:** May 09, 2025 – *before 11:59 PM*
+* **30 Marks:** After May 09, 2025
+
 ---
 
