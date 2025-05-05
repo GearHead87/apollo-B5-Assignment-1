@@ -1,5 +1,5 @@
 
-## Problem 1: Functions and Optional Parameters
+## Problem 1:
 
 **Description:**
 Create a function that takes a `string` and an optional `boolean`.
@@ -23,7 +23,7 @@ formatString("Hello", false);  // Output: "hello"
 
 ---
 
-## Problem 2: Array Filtering with Objects
+## Problem 2:
 
 **Description:**
 Create a function that filters an array of objects by the `rating` property, returning only items with a rating of **4 or more**.
@@ -49,7 +49,7 @@ filterByRating(books);
 
 ---
 
-## Problem 3: Generics and Rest Parameters
+## Problem 3:
 
 **Description:**
 Create a generic function that concatenates multiple arrays of the **same type** using rest parameters.
@@ -69,7 +69,7 @@ concatenateArrays([1, 2], [3, 4], [5]);     // Output: [1, 2, 3, 4, 5]
 
 ---
 
-## Problem 4: Classes and Inheritance
+## Problem 4:
 
 **Description:**
 
@@ -86,7 +86,7 @@ myCar.getModel();  // Output: "Model: Corolla"
 
 ---
 
-## Problem 5: Type Guards with Union Types
+## Problem 5:
 
 **Description:**
 Write a function that takes a `string | number` and returns:
@@ -109,7 +109,7 @@ processValue(10);      // Output: 20
 
 ---
 
-## Problem 6: Interfaces and Functions
+## Problem 6:
 
 **Description:**
 Define an interface `Product` and create a function to find the product with the **highest price** in an array. If the array is empty, return `null`.
@@ -140,7 +140,7 @@ getMostExpensiveProduct(products);
 
 ---
 
-## Problem 7: Enums and Switch Statements
+## Problem 7: 
 
 **Description:**
 
@@ -172,7 +172,7 @@ getDayType(Day.Sunday);   // Output: "Weekend"
 
 ---
 
-## Problem 8: Async Functions and Promises
+## Problem 8:
 
 **Description:**
 Create an async function that:
