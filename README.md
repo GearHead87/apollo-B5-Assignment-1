@@ -1,240 +1,78 @@
+## What is the use of the `keyof` keyword in TypeScript?
 
-## Problem 1:
+### The `keyof` Keyword in TypeScript
 
-**Description:**
-Create a function that takes a `string` and an optional `boolean`.
+The `keyof` keyword in TypeScript is a powerful operator that extracts all property names from an object type as a union of string literals. It creates what's called an "index type" or "key type."
 
-* If the boolean is `true` or not provided, return the string in **uppercase**.
-* If the boolean is `false`, return the string in **lowercase**.
+When you apply `keyof` to an object type, you get a union type containing all the property names:
 
-**Function Signature:**
-
-```ts
-function formatString(input: string, toUpper?: boolean): string
-```
-
-**Example:**
-
-```ts
-formatString("Hello");          // Output: "HELLO"
-formatString("Hello", true);   // Output: "HELLO"
-formatString("Hello", false);  // Output: "hello"
-```
-
----
-
-## Problem 2:
-
-**Description:**
-Create a function that filters an array of objects by the `rating` property, returning only items with a rating of **4 or more**.
-
-**Function Signature:**
-
-```ts
-function filterByRating(items: { title: string; rating: number }[]): { title: string; rating: number }[]
-```
-
-**Example:**
-
-```ts
-const books = [
-  { title: "Book A", rating: 4.5 },
-  { title: "Book B", rating: 3.2 },
-  { title: "Book C", rating: 5.0 }
-];
-
-filterByRating(books); 
-// Output: [ { title: "Book A", rating: 4.5 }, { title: "Book C", rating: 5.0 } ]
-```
-
----
-
-## Problem 3:
-
-**Description:**
-Create a generic function that concatenates multiple arrays of the **same type** using rest parameters.
-
-**Function Signature:**
-
-```ts
-function concatenateArrays<T>(...arrays: T[][]): T[]
-```
-
-**Example:**
-
-```ts
-concatenateArrays(["a", "b"], ["c"]);       // Output: ["a", "b", "c"]
-concatenateArrays([1, 2], [3, 4], [5]);     // Output: [1, 2, 3, 4, 5]
-```
-
----
-
-## Problem 4:
-
-**Description:**
-
-* Create a `Vehicle` class with private `make` and `year` properties and a `getInfo()` method.
-* Create a `Car` class extending `Vehicle`, adding a private `model` property and a `getModel()` method.
-
-**Example:**
-
-```ts
-const myCar = new Car("Toyota", 2020, "Corolla");
-myCar.getInfo();   // Output: "Make: Toyota, Year: 2020"
-myCar.getModel();  // Output: "Model: Corolla"
-```
-
----
-
-## Problem 5:
-
-**Description:**
-Write a function that takes a `string | number` and returns:
-
-* The **length** if it's a string
-* The **number multiplied by 2** if it's a number
-
-**Function Signature:**
-
-```ts
-function processValue(value: string | number): number
-```
-
-**Example:**
-
-```ts
-processValue("hello"); // Output: 5
-processValue(10);      // Output: 20
-```
-
----
-
-## Problem 6:
-
-**Description:**
-Define an interface `Product` and create a function to find the product with the **highest price** in an array. If the array is empty, return `null`.
-
-**Interface & Function Signature:**
-
-```ts
-interface Product {
+```typescript
+interface User {
+  id: number;
   name: string;
-  price: number;
+  email: string;
 }
 
-function getMostExpensiveProduct(products: Product[]): Product | null
+type UserKeys = keyof User; // Equivalent to: "id" | "name" | "email"
 ```
+### Provided an Example
 
-**Example:**
+This is particularly useful when creating functions that need to access object properties dynamically:
 
-```ts
-const products = [
-  { name: "Pen", price: 10 },
-  { name: "Notebook", price: 25 },
-  { name: "Bag", price: 50 }
-];
-
-getMostExpensiveProduct(products);  
-// Output: { name: "Bag", price: 50 }
-```
-
----
-
-## Problem 7: 
-
-**Description:**
-
-* Define an `enum Day` for the days of the week.
-* Create a function that returns `"Weekday"` or `"Weekend"` based on the input day.
-
-**Enum & Function Signature:**
-
-```ts
-enum Day {
-  Monday,
-  Tuesday,
-  Wednesday,
-  Thursday,
-  Friday,
-  Saturday,
-  Sunday
+```typescript
+function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
+  return obj[key];
 }
 
-function getDayType(day: Day): string
+const user = {
+  id: 123,
+  name: "Alice",
+  email: "alice@example.com"
+};
+
+const userName = getProperty(user, "name"); // Returns "Alice" with type string
+const userId = getProperty(user, "id");     // Returns 123 with type number
 ```
 
-**Example:**
+The magic here is that TypeScript knows the exact return type based on the key you provide. The function returns `T[K]`, which means "the type of the property K in object T."
 
-```ts
-getDayType(Day.Monday);   // Output: "Weekday"
-getDayType(Day.Sunday);   // Output: "Weekend"
+## What is type inference in TypeScript? 
+
+### Type Inference in TypeScript
+
+Type inference is TypeScript's ability to automatically determine types without explicit annotations. It's one of TypeScript's most useful features, making code cleaner while still maintaining type safety.
+
+```typescript
+// No type annotations needed:
+let message = "Hello"; // TypeScript infers message is a string
+let count = 42;        // TypeScript infers count is a number
+let items = [1, 2, 3]; // TypeScript infers items is number[]
 ```
 
----
+TypeScript can also infer return types from functions:
 
-## Problem 8:
-
-**Description:**
-Create an async function that:
-
-* Returns the square of a number after 1 second
-* Rejects if the number is negative
-
-**Function Signature:**
-
-```ts
-async function squareAsync(n: number): Promise<number>
+```typescript
+function multiply(a: number, b: number) {
+  return a * b;
+} // Return type is inferred as number
 ```
 
-**Example:**
+This works with complex types too:
 
-```ts
-squareAsync(4).then(console.log);        // Output after 1s: 16
-squareAsync(-3).catch(console.error);    // Output: Error: Negative number not allowed
+```typescript
+const userData = {
+  name: "Bob",
+  age: 30,
+  active: true
+}; // TypeScript infers { name: string; age: number; active: boolean }
 ```
+### Why it it helpful?
 
+Type inference is helpful because:
 
----
+1. It reduces the amount of code you need to write
+2. It prevents errors from manual type annotations
+3. It makes refactoring easier as types update automatically
+4. It keeps the code readable while maintaining type safety
 
-
-## 🎯 Interview Questions - Blog Task
-
-### Write an impactful blog post on **2 of the following questions**:
-
-1. What are some differences between interfaces and types in TypeScript?
-2. What is the use of the `keyof` keyword in TypeScript? Provide an example.
-3. Explain the difference between `any`, `unknown`, and `never` types in TypeScript.
-4. What is the use of `enums` in TypeScript? Provide an example of a numeric and string enum.
-5. What is type inference in TypeScript? Why is it helpful?
-6. How does TypeScript help in improving code quality and project maintainability?
-7. Provide an example of using **union** and **intersection** types in TypeScript.
-
-✅ **Instructions:**
-
-* Choose **any 2** topics from the list and write a blog post about them.
-* Present your blog through the `README.md` file in your GitHub repository.
-* All solutions must be in a **single TypeScript file**.
-* Do **not** include comments like “Problem 1”, “Problem 2”, etc., in your code.
-* Use **meaningful names** for all variables, functions, and classes.
-* Ensure the code is **original**.
-
-  > ⚠️ Plagiarism (copying from friends or online sources) will result in a **zero**.
-* Submit a **GitHub public repository link** containing your:
-
-  * Solutions file
-  * `README.md` with the blog content
-
-## 📤 Submission Guidelines:
-
-* 🔗 **Submit:** GitHub Public Repository Link
-* 📝 **Ensure:** The blog content is inside the `README.md` file
-* 📂 **Organize:** All code and documentation should be in one repo
-
-## 🕒 Assignment Deadlines:
-
-* **60 Marks:** May 08, 2025 – *before 11:59 PM*
-* **50 Marks:** May 09, 2025 – *before 11:59 PM*
-* **30 Marks:** After May 09, 2025
-
----
-
+While explicit type annotations are sometimes necessary for clarity or to define intent, TypeScript's inference often strikes the right balance between verbosity and safety. 
