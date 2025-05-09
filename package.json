@@ -1,5 +1,8 @@
 {
-  "dependencies": {
-    "tsx": "^4.19.4"
-  }
+	"scripts": {
+		"dev": "tsx watch solutions.ts"
+	},
+	"devDependencies": {
+		"tsx": "^4.19.1"
+	}
 }
